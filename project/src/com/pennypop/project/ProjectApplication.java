@@ -1,6 +1,7 @@
 package com.pennypop.project;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -13,54 +14,52 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * 
  * @author Richard Taylor
  * */
-public class ProjectApplication implements ApplicationListener {
-	public final boolean gameOn = false;
-	private Screen screen;
-	private static Connect4Game game;
+public class ProjectApplication extends Game implements ApplicationListener {
+	public static boolean gameOn = false;
+	public static Screen mainScreen;
 
 	public static void main(String[] args) {
 		new LwjglApplication(new ProjectApplication(), "PennyPop", 1280, 720,
 				true);
-    	// init game
-    	game = new Connect4Game();
 	}
 
 	@Override
 	public void create() {
-		screen = new MainScreen(game);
-		screen.show();
+		mainScreen = new MainScreen(this);
+		setScreen(mainScreen);
 	}
 
 	@Override
 	public void dispose() {
-		screen.hide();
-		screen.dispose();
+		//mainScreen.hide();
+		//mainScreen.dispose();
 	}
 
 	@Override
 	public void pause() {
-		screen.pause();
+		//mainScreen.pause();
 	}
 
 	@Override
 	public void render() {
-		clearWhite();
-		screen.render(Gdx.graphics.getDeltaTime());
+		super.render();
+		//clearWhite();
+		//mainScreen.render(Gdx.graphics.getDeltaTime());
 	}
 
 	/** Clears the screen with a white color */
-	private void clearWhite() {
+	public void clearWhite() {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		screen.resize(width, height);
+		//mainScreen.resize(width, height);
 	}
 
 	@Override
 	public void resume() {
-		screen.resume();
+		//mainScreen.resume();
 	}
 }

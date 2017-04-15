@@ -58,10 +58,10 @@ public class MainScreen implements Screen {
     private String weatherDescription;
     private String weatherData;
     // game
-    private final Connect4Game game;
+    private final ProjectApplication game;
     private boolean gameOn = false;
 	
-	public MainScreen(Connect4Game game) {
+	public MainScreen(ProjectApplication game) {
 		this.game = game;
 		spriteBatch = new SpriteBatch();
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
@@ -76,6 +76,8 @@ public class MainScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		game.clearWhite();
+		
 		stage.act(delta);
 		stage.draw();
 		
@@ -100,6 +102,7 @@ public class MainScreen implements Screen {
         // game
         if (gameOn) {
         	game.setScreen(new GameScreen(game, this, spriteBatch));
+        	// dispose();
         }
 	}
 
